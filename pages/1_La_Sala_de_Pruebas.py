@@ -12,7 +12,6 @@ st.write("Responde a los siguientes escenarios eligiendo la opción que te atrap
 
 st.markdown("---")
 st.subheader("Escenario 1: Tu Lugar Favorito")
-# CORRECCIÓN: Se elimina 'index=None' para asegurar que siempre se muestre.
 q1 = st.radio(
     "Estás describiendo tu lugar favorito. ¿Qué frase te representa más?",
     [
@@ -29,6 +28,41 @@ q2 = st.radio(
     [
         "Siguió al sospechoso hasta el muelle, encontró la maleta y, al abrirla, descubrió el arma.",
         "El arma brillaba bajo la luz. ¿Cómo había llegado hasta aquí? Tres días antes, en el bar, una conversación sin importancia ahora cobraba un nuevo y siniestro significado."
+    ],
+    key="q2"
+)
+
+st.markdown("---")
+st.subheader("Escenario 3: La Casa Encantada")
+q3 = st.radio(
+    "El protagonista está a punto de entrar en una casa encantada. ¿Qué te atrapa más?",
+    [
+        "Sentí un escalofrío recorrer mi espalda. Mi mano temblaba mientras giraba el pomo helado de la puerta. No quería entrar, pero tenía que hacerlo.",
+        "Él sintió un escalofrío recorrer su espalda. Su mano temblaba mientras giraba el pomo helado de la puerta. No quería entrar, pero tenía que hacerlo."
+    ],
+    key="q3"
+)
+
+st.markdown("---")
+st.subheader("Escenario 4: El Objetivo de la Narración")
+q4 = st.radio(
+    "¿Cuál crees que es el propósito principal de una buena historia?",
+    [
+        "Transportarte a otro mundo con detalles vívidos y sensoriales.",
+        "Hacerte reflexionar sobre una idea o convencerte de una verdad profunda."
+    ],
+    key="q4"
+)
+
+
+# --- Botón para ver resultados ---
+st.markdown("---")
+# CORRECCIÓN: Se completó la línea del botón
+if st.button("Analizar mi Estilo Narrativo", type="primary"):
+    # Guardamos una señal de que el cuestionario se completó
+    st.session_state['respuestas_completas'] = True
+    st.success("¡Análisis completado! Ve a la 'Sala de Diagnóstico' para ver tu resultado.")
+    st.balloons()
     ],
     key="q2"
 )
