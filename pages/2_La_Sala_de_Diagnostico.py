@@ -28,18 +28,25 @@ DESCRIPCIONES = {
 
 # --- Lógica del Diagnóstico ---
 
-# CORRECCIÓN: Ahora verificamos la señal 'respuestas_completas' que creamos en la página anterior.
+# Verificamos si el usuario hizo clic en el botón "Analizar" en la página anterior.
 if st.session_state.get('respuestas_completas', False):
-    # Contar los puntos para el estilo principal
+    
+    # CORRECCIÓN: Usamos .get("key", "") para leer las respuestas de forma segura.
+    # Esto evita el AttributeError si una clave no existe temporalmente.
+    respuesta_q1 = st.session_state.get("q1", "")
+    respuesta_q2 = st.session_state.get("q2", "")
+    respuesta_q3 = st.session_state.get("q3", "")
+    respuesta_q4 = st.session_state.get("q4", "")
+    
     puntos_descriptivo = 0
     puntos_persuasivo = 0
 
-    if "Las paredes de adobe" in st.session_state.q1:
+    if "Las paredes de adobe" in respuesta_q1:
         puntos_descriptivo += 1
     else:
         puntos_persuasivo += 1
     
-    if "Transportarte a otro mundo" in st.session_state.q4:
+    if "Transportarte a otro mundo" in respuesta_q4:
         puntos_descriptivo += 1
     else:
         puntos_persuasivo += 1
@@ -53,8 +60,8 @@ if st.session_state.get('respuestas_completas', False):
         estilo_principal = "Híbrido"
 
     # Determinar características secundarias
-    estructura = "Lineal" if "Siguió al sospechoso" in st.session_state.q2 else "No Lineal"
-    punto_de_vista = "Primera Persona" if "Sentí un escalofrío" in st.session_state.q3 else "Tercera Persona"
+    estructura = "Lineal" if "Siguió al sospechoso" in respuesta_q2 else "No Lineal"
+    punto_de_vista = "Primera Persona" if "Sentí un escalofrío" in respuesta_q3 else "Tercera Persona"
 
     # --- Mostrar los Resultados ---
     st.header("Tu Perfil de Lector")
