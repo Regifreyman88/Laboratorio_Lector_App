@@ -8,7 +8,6 @@ st.set_page_config(
 st.title("💡 La Sala de Diagnóstico")
 
 # --- Descripciones de cada Estilo Narrativo ---
-# Basado en el artículo de Indeed.com
 DESCRIPCIONES = {
     "Descriptivo": {
         "titulo": "Tu Estilo Dominante es: Descriptivo 🎨",
@@ -29,11 +28,8 @@ DESCRIPCIONES = {
 
 # --- Lógica del Diagnóstico ---
 
-# Verificar si el usuario ha respondido todas las preguntas
-if 'q1' not in st.session_state or 'q2' not in st.session_state or 'q3' not in st.session_state or 'q4' not in st.session_state:
-    st.warning("⚠️ Primero debes completar el cuestionario en la 'Sala de Pruebas' para recibir tu diagnóstico.")
-    st.link_button("Ir a la Sala de Pruebas", "/La_Sala_de_Pruebas")
-else:
+# CORRECCIÓN: Ahora verificamos la señal 'respuestas_completas' que creamos en la página anterior.
+if st.session_state.get('respuestas_completas', False):
     # Contar los puntos para el estilo principal
     puntos_descriptivo = 0
     puntos_persuasivo = 0
@@ -73,3 +69,7 @@ else:
     st.subheader("Características Secundarias de tu Estilo:")
     st.markdown(f"- **Estructura Preferida:** `{estructura}`")
     st.markdown(f"- **Punto de Vista Preferido:** `{punto_de_vista}`")
+
+else:
+    st.warning("⚠️ Primero debes completar el cuestionario en la 'Sala de Pruebas' y hacer clic en 'Analizar' para recibir tu diagnóstico.")
+    st.link_button("Ir a la Sala de Pruebas", "/La_Sala_de_Pruebas")
